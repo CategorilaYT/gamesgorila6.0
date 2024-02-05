@@ -1,0 +1,157 @@
+<!DOCTYPE html>
+<html lang="pt-BR">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Doações para Categorila</title>
+    <style>
+        body {
+            font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+            background-color: #f8f8f8;
+            margin: 0;
+            padding: 0;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            min-height: 100vh;
+        }
+
+        .container {
+            background-color: #fff;
+            border-radius: 10px;
+            box-shadow: 0 0 20px rgba(0, 0, 0, 0.1);
+            overflow: hidden;
+            width: 90%;
+            max-width: 600px;
+            padding: 40px;
+            text-align: center;
+            position: relative;
+        }
+
+        h1 {
+            color: #333;
+            margin-bottom: 20px;
+        }
+
+        p {
+            color: #666;
+            font-size: 16px;
+            margin-bottom: 30px;
+        }
+
+        .donate-btn {
+            background-color: #4CAF50;
+            color: #fff;
+            padding: 15px 30px;
+            font-size: 18px;
+            border: none;
+            border-radius: 5px;
+            cursor: pointer;
+            transition: background-color 0.3s;
+            margin-top: 20px;
+        }
+
+        .donate-btn:hover {
+            background-color: #45a049;
+        }
+
+        .pix-info {
+            display: none;
+            margin-top: 30px;
+        }
+
+        .pix-image {
+            width: 100%;
+            max-width: 200px;
+            margin: 20px auto;
+        }
+
+        .pix-key {
+            padding: 10px;
+            margin: 20px 0;
+            width: 100%;
+            box-sizing: border-box;
+            border: 1px solid #ddd;
+            border-radius: 5px;
+        }
+
+        .footer {
+            margin-top: 30px;
+            color: #999;
+        }
+
+        .footer a {
+            color: #4CAF50;
+            text-decoration: none;
+            font-weight: bold;
+        }
+
+        .back-btn {
+            background-color: #333;
+            color: #fff;
+            padding: 10px 20px;
+            font-size: 16px;
+            border: none;
+            border-radius: 5px;
+            cursor: pointer;
+            transition: background-color 0.3s;
+            margin-top: 20px;
+        }
+
+        .back-btn:hover {
+            background-color: #555;
+        }
+
+        .redirect-btn {
+            background-color: #4CAF50;
+            color: #fff;
+            padding: 10px 20px;
+            font-size: 16px;
+            border: none;
+            border-radius: 5px;
+            cursor: pointer;
+            transition: background-color 0.3s;
+            margin-top: 20px;
+        }
+
+        .redirect-btn:hover {
+            background-color: #45a049;
+        }
+    </style>
+</head>
+<body>
+
+    <div class="container">
+        <h1> Faça uma Doação para Categorila </h1>
+        <p> Sua contribuição faz a diferença! Ajude-nos a continuar fornecendo conteúdo valioso para você. Já que este site não foi criado por uma equipe, apenas uma pessoa está cuidando desse site, Obrigado!</p>
+
+        <button class="donate-btn" onclick="togglePixInfo()">Doar Agora</button>
+
+        <div class="pix-info" id="pixInfo">
+            <!-- Adicione a imagem do Pix e a chave Pix aqui -->
+            <img class="pix-image" src="img/Pix.png" alt="Pix Payment">
+            <p>Use a chave Pix CPF abaixo para fazer a sua doação:</p>
+            <div class="pix-key" id="pixKey">[494.419.888.47]</div>
+            <div class="pix-key" id="pixkey">Use no seu aplicativo Bancário. Ou acesse o link para o site de pagamento rápido.</div>
+            <button class="back-btn" onclick="goBack()">Voltar</button>
+            <a href="https://livepix.gg/categorilayt" target="_blank" class="redirect-btn">Ir para o Pagamento Pix</a>
+        </div>
+
+        <div class="footer">
+            <p>Para mais informações sobre doações, visite nossa <a href="[Link para a página de doações]">página de Política De Privacidade</a>.</p>
+        </div>
+    </div>
+
+    <script>
+        function togglePixInfo() {
+            var pixInfo = document.getElementById('pixInfo');
+            pixInfo.style.display = (pixInfo.style.display === "none" || pixInfo.style.display === "") ? "block" : "none";
+        }
+
+        function goBack() {
+            window.history.back();
+        }
+    </script>
+
+</body>
+</html>

@@ -1,0 +1,658 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Categorila</title>
+    <link rel="stylesheet" href="styles.css">
+    <style>
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+        }
+
+        body {
+            margin: 0;
+            font-family: 'Arial', sans-serif;
+            background-color: #d4d4d4;
+            font-size: 16px;
+            padding-right: 1px; /* Adiciona um espaço para compensar a barra de rolagem vertical em alguns navegadores */
+        }
+
+        html, body {
+            max-width: 100%;
+            overflow-x: hidden;
+        }
+
+
+        header {
+            background-color: #2e2e2e;
+            padding: 15px 0;
+            position: relative;
+            text-align: center;
+            color: #fff;
+        }
+        
+        .navbar {
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            max-width: 1000px;
+            margin: 0 auto;
+        }
+
+        .logo a {
+            color: #fff;
+            text-decoration: none;
+            font-size: 1.5em;
+            font-weight: bold;
+            display: flex;
+            align-items: center;
+        }
+
+        .nav-links {
+            list-style: none;
+            display: flex;
+        }
+
+        .nav-links li {
+            margin-right: 20px;
+        }
+
+        .nav-links a {
+            color: #fff;
+            text-decoration: none;
+            font-weight: bold;
+            padding: 10px 20px;
+            border-radius: 30px;
+            background: linear-gradient(45deg, #4caf50, #45a049);
+            transition: background-color 0.3s ease-in-out;
+            position: relative;
+            overflow: hidden;
+            box-shadow: 0 5px 15px rgba(0, 0, 0, 0.2);
+        }
+
+        .nav-links a::before,
+        .nav-links a::after {
+            content: '';
+            position: absolute;
+            width: 100%;
+            height: 2px;
+        }
+
+        .nav-links a::before {
+            top: 0;
+        }
+
+        .nav-links a::after {
+            bottom: 0;
+        }
+
+        .nav-links a:hover {
+            background: linear-gradient(45deg, #45a049, #4caf50);
+        }
+
+        .nav-links a:hover::before,
+        .nav-links a:hover::after {
+            transform: scaleX(1);
+        }
+
+        .card-row {
+            display: flex;
+            flex-wrap: wrap;
+            justify-content: space-around;
+        }
+
+
+        .cards {
+            font-family: 'Arial', sans-serif;
+            margin: 20px;
+            display: flex;
+            flex-wrap: wrap;
+            justify-content: space-around;
+            background-color: #d4d4d4;
+            flex: 1 1 calc(25% - 20px); /* ajuste a largura máxima para 25% (4 cards por linha) */
+            box-sizing: border-box;
+        }
+
+        .card {
+            background-color: #fff;
+            box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
+            padding: 20px;
+            border-radius: 8px;
+            margin: 20px;
+            transition: 0.5s;
+            flex: 1;
+            max-width: 300px;
+        }
+
+        .card:hover {
+            transform: scale(1.05);
+        }
+
+        .card img {
+            width: 100%;
+            height: 200px;
+            object-fit: cover;
+            border-radius: 8px 8px 0 0;
+            border-bottom: 1px solid #ddd;
+        }
+
+        .card-content {
+            padding: 20px;
+        }
+
+        .card h3 {
+            margin: 0;
+            color: #333;
+        }
+
+        .card p {
+            color: #666;
+            margin-bottom: 10px;
+        }
+
+        .card a {
+            display: inline-block;
+            padding: 10px;
+            background-color: #4caf50;
+            color: #fff;
+            text-decoration: none;
+            border-radius: 4px;
+            transition: background-color 0.3s ease-in-out;
+        }
+
+        .card a:hover {
+            background-color: #45a049;
+        }
+
+        .logo {
+            margin-left: -55px;
+            margin-top: 30;
+        }
+
+        .titulo2 {
+            color: #ffffff;
+            
+        }
+
+        .updates-container {
+            color: #000000;
+            font-family:Arial, Helvetica, sans-serif
+        }
+
+        .search-form {
+            display: flex;
+            margin-top: 10px;
+            justify-content: center;
+        }
+
+        .search-form input {
+            padding: 8px;
+            border: none;
+            border-radius: 4px 0 0 4px;
+        }
+
+        .search-form button {
+            padding: 8px 12px;
+            background-color: #4caf50;
+            color: #fff;
+            border: none;
+            border-radius: 0 4px 4px 0;
+            cursor: pointer;
+        }
+
+        .search-form button:hover {
+            background-color: #45a049;
+        }
+
+        .titulo2 {
+            color: black;
+        } 
+        
+        .menu-hamburguer {
+    font-size: 24px;
+    cursor: pointer;
+    color: #fff;
+    position: fixed;
+    left: 20px;
+    top: 15px;
+    z-index: 1001;
+}
+
+.categories {
+    background-color: #333;
+    color: #fff;
+    padding: 20px;
+    width: 200px;
+    height: 100%;
+    position: fixed;
+    top: 0;
+    left: -200px;
+    transition: left 0.3s ease-in-out;
+    z-index: 1000;
+}
+
+.categories ul {
+    list-style: none;
+    padding: 0;
+}
+
+.categories li {
+    margin-bottom: 10px;
+}
+
+.categories a {
+    text-decoration: none;
+    color: #fff;
+    font-weight: bold;
+    font-size: 16px;
+}
+
+.close-btn {
+    font-size: 24px;
+    cursor: pointer;
+    color: #fff;
+    position: absolute;
+    top: 10px;
+    right: 10px;
+}
+
+
+footer {
+  background-color: #333;
+  color: #fff;
+  padding: 20px;
+}
+
+.footer-content {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  flex-wrap: wrap;
+}
+
+.social-media {
+  display: flex;
+}
+
+.social-media a {
+  margin-right: 10px;
+}
+
+.social-media a img {
+  width: 30px;
+  height: 30px;
+  object-fit: cover;
+}
+
+.contact-info p {
+  margin: 0 10px;
+}
+
+.contact-info a {
+    text-decoration: none; /* Remove a linha sublinhada */
+    color: #FFF; /* Altera a cor do link para preto (ou qualquer cor desejada) */
+}
+
+        .mensagem-container {
+            position: relative;
+            max-width: 400px;
+            width: 100%;
+        }
+
+        .mensagem {
+            background-color: #1eadf0;
+            color: #fff;
+            padding: 20px;
+            border-radius: 10px;
+            text-align: center;
+            box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
+        }
+
+        .fechar {
+            position: absolute;
+            top: 5px;
+            right: 5px;
+            cursor: pointer;
+        }
+
+
+    </style>
+</head>
+<body>
+
+    <div class="menu-hamburguer" id="menuHamburguer">&#9776;</div>
+
+    
+    <div class="categories" id="categories">
+        <div class="close-btn" id="closeBtn">&times;</div>
+        <ul>
+            <li><a href="Corrida.html">Corrida</a></li>
+            <li><a href="Ação.html">Ação</a></li>
+            <li><a href="Terror.html">Terror</a></li>
+            <!-- Adicione mais categorias conforme necessário -->
+        </ul>
+    </div>
+
+    <header>
+        <nav class="navbar">
+            <div class="logo">
+                <img class="Imagem" src="img/channels4_profile-removebg-preview_resized_batcheditor_fotor (1) (1).png" alt="imagem" width="39" height="39">
+                <a href="index.html">Categorila</a>
+            </div>
+            <ul class="nav-links">
+                <li><a href="politicadeprivacidade.html">Política De Privacidade</a></li>
+                <li><a href="sobre.html">Sobre</a></li>
+                <li><a href="atualizações.html">Atualizações</a></li>
+                <li><a href="contato.html">Contato</a></li>
+                <li><a href="otimizacao.html">Otimizações</a></li>
+                <li><a href="aplicativos.html">Aplicativos</a></li>
+            </ul>
+        </nav>
+
+        <form action="#" method="get" class="search-form" id="searchForm">
+            <input type="text" name="q" placeholder="Pesquisar jogos...">
+            <button type="submit">Pesquisar</button>
+        </form>
+
+        <div id="searchResults"></div>
+
+    </header>
+
+    <div class="mensagem-container">
+        <div class="mensagem" id="mensagem">
+            <span class="fechar" onclick="fecharMensagem()">X</span>
+            <h1>Bem-vindo ao Site!</h1>
+            <p>Aproveite sua visita. Baixe arquivos de grandes variedades em nosso site!</p>
+        </div>
+    </div>
+
+
+
+    <section class="cards" id="gameCards">
+        <div class="card-row">
+            <div class="card acao">
+                <img src="img/bmw-m3-coupe-gtr-2001-003-20211028174956-1600x1066_Easy-Resize.com.jpg" alt="Imagem do Card 1">
+                <div class="card-content">
+                    <h3>Need For Speed Most Wanted 2005</h3>
+                    <p>Need For Speed Most Wanted, criado em 2005, jogo de corrida e perseguição policial.</p>
+                    <a href="Corrida/nfs-card.html">Baixar agora</a>
+                </div>
+            </div>
+        
+            <div class="card">
+                <img src="img/unnamed.png" alt="Imagem do Card 2">
+                <div class="card-content">
+                    <h3>Sonic The Hedgehog</h3>
+                    <p>Sonic the Hedgehog é uma franquia de mídia criada e administrada por Yuji Naka e Naoto Oshima da equipe Sonic Team, da Sega. O primeiro jogo da série Sonic.</p>
+                    <a href="Ação/sonic.html">Baixar agora</a>
+                </div>
+            </div>
+        </div>
+        
+        <!-- Adicione outra fila -->
+        <div class="card-row">
+            <div class="card">
+                <img src="img/143976514_480331393346873_1805326341434727690_n.jpg" alt="Imagem do Card 3">
+                <div class="card-content">
+                    <h3>Bomba Patch (PSP)</h3>
+                    <p>Bomba Patch é uma série de modificações da série de jogos eletrônicos de futebol Pro Evolution Soccer, criada pelo brasileiro Allan Jefferson. Originou-se em 2007 a partir de um campeonato do sexto título da série, organizado por ele em sua locadora.</p>
+                    <a href="Ação/bomba-patch.html">Baixar agora</a>
+                </div>
+            </div>
+        
+            <div class="card">
+                <!-- Conteúdo do quarto card -->
+                <img src="img/minecraft-minecraft-dungeons-ocean-view-minecraft-dungeons-hidden-depths-4k-hd-wallpaper-preview.jpg" alt="Imagem do Card 4">
+                <div class="card-content">
+                    <h3>Minecraft Lite</h3>
+                    <p>Minecraft lite para rodar em aparelhos humildes.</p>
+                    <a href="Ação/minecraft.html">Baixar agora</a>
+                </div>
+            </div>
+        </div>
+
+        <!-- Adicione outra fila -->
+        <div class="card-row">
+            <div class="card acao">
+                <img src="img/need-for-speed-underground-2-3840x2160-v0-aubav3w9ngm91.png" alt="Imagem do Card 5">
+                <div class="card-content">
+                    <h3>Need For Speed Underground 2 remaster mod</h3>
+                    <p>Need For Speed Most Wanted, criado em 2005, jogo de corrida e perseguição policial.</p>
+                    <a href="Corrida/nfsu.html">Baixar agora</a>
+                </div>
+            </div>
+        
+            <div class="card">
+                <!-- Conteúdo do quarto card -->
+                <img src="img/46f8b7ef8318b4c2cc2fe8a826bebc74.jpg" alt="Imagem do Card 6">
+                <div class="card-content">
+                    <h3>FPS Unlocker roblox</h3>
+                    <p>Programa que desbloqueia o limite de FPS do roblox!</p>
+                    <a href="Ação/roblox.html">Baixar agora</a>
+                </div>
+            </div>
+        </div>
+
+<!-- segunda fileira com 6 cards -->
+
+        <div class="card-row">
+            <div class="card acao">
+                <img src="img/download2.jpg" alt="Imagem do Card 1">
+                <div class="card-content">
+                    <h3>Fnaf Ultimate Edition</h3>
+                    <p>Pegue as partes mais legais da série Five Nights at Freddy's, junte-as e BOOM- você tem FNaF Ultimate Edition!</p>
+                    <a href="Terror/fnafultmate.html">Baixar agora</a>
+                </div>
+            </div>
+        
+            <div class="card">
+                <img src="img/minecraft-100x100.webp" alt="Imagem do Card 2">
+                <div class="card-content">
+                    <h3>Minecraft Java Edition</h3>
+                    <p>Minecraft Java Edition é um jogo sandbox, Você consegue criar varias coisas com sua imaginação!</p>
+                    <a href="Ação/Minecraftjava.html">Baixar agora</a>
+                </div>
+            </div>
+        </div>
+        
+        <!-- Adicione outra fila -->
+        <div class="card-row">
+            <div class="card">
+                <img src="img/five_nights_at_freddys.webp" alt="Imagem do Card 3">
+                <div class="card-content">
+                    <h3>Five Night's At Freddy's 1, 2, 3.</h3>
+                    <p>Os 3 incríveis jogos de fnaf! Com a franquia de fnaf 1, 2 e 3!</p>
+                    <a href="Terror/Fnaf123.html">Baixar agora</a>
+                </div>
+            </div>
+        
+            <div class="card">
+                <!-- Conteúdo do quarto card -->
+                <img src="img/pou.png" alt="Imagem do Card 4">
+                <div class="card-content">
+                    <h3>Pou Apk Mod Dinheiro Infinito</h3>
+                    <p>Minecraft lite para rodar em aparelhos humildes.</p>
+                    <a href="Ação/pou.html">Baixar agora</a>
+                </div>
+            </div>
+        </div>
+
+        <!-- Adicione outra fila -->
+        <div class="card-row">
+            <div class="card acao">
+                <img src="img/4966278a3cf2dc08f7d860e7131ceff9.jpeg" alt="Imagem do Card 5">
+                <div class="card-content">
+                    <h3>CarX Street</h3>
+                    <p>Gráficos espetaculares e corridas divertidas te esperam nesta cidade.</p>
+                    <a href="Corrida/carxstreet.html">Baixar agora</a>
+                </div>
+            </div>
+        
+            <div class="card">
+                <!-- Conteúdo do quarto card -->
+                <img src="img/kinemaster.png" alt="Imagem do Card 6">
+                <div class="card-content">
+                    <h3>Kinemaster Diamond *sem marca d'agua*</h3>
+                    <p>Programa que desbloqueia o limite de FPS do roblox!</p>
+                    <a href="Ação/kinemaster.html">Baixar agora</a>
+                </div>
+            </div>
+        </div>
+
+
+        <div class="card-row">
+            <div class="card">
+                <img src="img/Soul.png" alt="Imagem do Card 1">
+                <div class="card-content">
+                    <h3>Soul Knight Apk Mod</h3>
+                    <p>Liberado GOD MODE e Dinheiro infinito.</p>
+                    <a href="Ação/SoulKnightMod.html">Baixar agora</a>
+                </div>
+            </div>
+        
+            <div class="card">
+                <img src="data:image/jpeg;base64,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" alt="Imagem do Card 2">
+                <div class="card-content">
+                    <h3>OBS Studio</h3>
+                    <p>Obs studio orginal.</p>
+                    <a href="Ação/obsoriginal.html">Baixar agora</a>
+                </div>
+            </div>
+        </div>
+        
+        <!-- Adicione outra fila -->
+        <div class="card-row">
+            <div class="card">
+                <img src="img/cec0be53d438edb419705035a5b566f8.jpg" alt="Imagem do Card 3">
+                <div class="card-content">
+                    <h3>Grand Theft Auto San Andreas Cleo Br</h3>
+                    <p>Gta com cleo mod traduzido para pt-br..</p>
+                    <a href="Ação/gtasan.html">Baixar agora</a>
+                </div>
+            </div>
+        
+            <div class="card">
+                <!-- Conteúdo do quarto card -->
+                <img src="https://play-lh.googleusercontent.com/pl60B3sxB0N3fH1LeepWWUUxIErNb0NAv4LeqKlONKIwsZswQ6B7UbjibB2ZzOw1dQ" alt="Imagem do Card 4">
+                <div class="card-content">
+                    <h3>Subway Surfers Mod</h3>
+                    <p>Mod Menu atualizado V6.</p>
+                    <a href="Ação/subwaysurfes.html">Baixar agora</a>
+                </div>
+            </div>
+        </div>
+
+        <!-- Adicione outra fila -->
+        <div class="card-row">
+            <div class="card">
+                <img src="img/exploration.webp" alt="Imagem do Card 5">
+                <div class="card-content">
+                    <h3>Exploration Lite</h3>
+                    <p>Esse é o primeiro minecraft que você ja jogou? o meu sim hehe.</p>
+                    <a href="Ação/Exploration.html">Baixar agora</a>
+                </div>
+            </div>
+        
+            <div class="card">
+                <!-- Conteúdo do quarto card -->
+                <img src="https://liteapks.com/wp-content/uploads/2022/10/mini-soccer-star-2022-cup-150x150.jpg" alt="Imagem do Card 6">
+                <div class="card-content">
+                    <h3>Mini Soccer Star 23 Mod</h3>
+                    <p>Ja pensou jogar esse jogo com infinitas moedas?</p>
+                    <a href="Ação/minisoccerstar.html">Baixar agora</a>
+                </div>
+            </div>
+
+            <div class="card-row">
+            <div class="card">
+                <img src="https://i.ytimg.com/vi/EGzBn7kfJXg/maxresdefault.jpg" alt="Imagem do Card 5">
+                <div class="card-content">
+                    <h3>Fifa 14 mod 23-24 apk</h3>
+                    <p>Fifa 14 modificado e atualizado para 23-24.</p>
+                    <a href="Ação/fifa14mod.html">Baixar agora</a>
+                </div>
+            </div>
+        
+            <div class="card">
+                <!-- Conteúdo do quarto card -->
+                <img src="https://gamedva.com/wp-content/uploads/Dr-Driving.jpg" alt="Imagem do Card 6">
+                <div class="card-content">
+                    <h3>Dr Driving Apk Mod Dinheiro Infinito</h3>
+                    <p>Jogo modificado com mais moedas adicionadas</p>
+                    <a href="Ação/drdriving.html">Baixar agora</a>
+                </div>
+            </div>
+        </div>
+    </section>
+
+
+    <!-- Conteúdo da página aqui -->
+    <div class="paragrafo">
+        <p>Site 5.5.</p>
+    </div> 
+    
+    <script>
+        document.getElementById('searchForm').addEventListener('submit', function (event) {
+    event.preventDefault();
+    const searchTerm = document.querySelector('input[name="q"]').value.toLowerCase();
+
+    const gameCards = document.querySelectorAll('.card');
+
+    gameCards.forEach(card => {
+        const cardTitle = card.querySelector('h3').innerText.toLowerCase();
+        const cardContent = card.querySelector('p').innerText.toLowerCase();
+
+        if (cardTitle.includes(searchTerm) || cardContent.includes(searchTerm)) {
+            card.style.display = 'block';
+        } else {
+            card.style.display = 'none';
+        }
+    });
+});
+
+document.addEventListener('DOMContentLoaded', function () {
+        const menuHamburguer = document.getElementById('menuHamburguer');
+        const categories = document.getElementById('categories');
+        const closeBtn = document.getElementById('closeBtn');
+
+        menuHamburguer.addEventListener('click', function () {
+            categories.style.left = '0';
+            menuHamburguer.style.display = 'none';
+        });
+
+        closeBtn.addEventListener('click', function () {
+            categories.style.left = '-200px';
+            menuHamburguer.style.display = 'block';
+        });
+    });
+
+    function fecharMensagem() {
+        document.getElementById('mensagem').style.display = 'none';
+    }
+
+    </script>
+
+
+<footer>
+    <div class="footer-content">
+      <div class="social-media">
+        <a href="https://twitter.com/CategorilaYT"><img src="data:image/png;base64,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" alt="Twitter"></a>
+        <a href="#"><img src="https://img.freepik.com/vetores-premium/icone-do-instagram-de-logotipo-de-distintivo-moderno_578229-124.jpg" alt="Instagram"></a>
+        <a href="https://www.youtube.com/channel/UCqXot5qucqXumGHjwTjw4wQ"><img src="https://img.freepik.com/vetores-premium/logo-vermelho-do-youtube-logo-de-midia-social_197792-1803.jpg" alt="YouTube"></a>
+      </div>
+      <p>&copy; 2023-2024 gamesgorila - Todos os direitos reservados.</p>
+      <div class="contact-info">
+        <p><a href="politicadeprivacidade.html">Política De Privacidade </a></p>
+        <br>
+        <p><a href="contato.html">Fale Conosco </a></p>
+        <br>
+        <p><a href="doações.html">Doações</a></p>
+      </div>
+    </div>
+</footer>
+
+</body>
+</html>

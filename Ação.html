@@ -1,0 +1,410 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Categorila</title>
+    <link rel="stylesheet" href="styles.css">
+    <style>
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+        }
+
+        body {
+            margin: 0;
+            font-family: 'Arial', sans-serif;
+            background-color: #d4d4d4;
+        }
+
+
+        header {
+            background-color: #2e2e2e;
+            padding: 15px 0;
+            position: relative;
+            text-align: center;
+            color: #fff;
+        }
+        
+        .navbar {
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            max-width: 1000px;
+            margin: 0 auto;
+        }
+
+        .logo a {
+            color: #fff;
+            text-decoration: none;
+            font-size: 1.5em;
+            font-weight: bold;
+            display: flex;
+            align-items: center;
+        }
+
+        .nav-links {
+            list-style: none;
+            display: flex;
+        }
+
+        .nav-links li {
+            margin-right: 20px;
+        }
+
+        .nav-links a {
+            color: #fff;
+            text-decoration: none;
+            font-weight: bold;
+            padding: 10px 20px;
+            border-radius: 30px;
+            background: linear-gradient(45deg, #4caf50, #45a049);
+            transition: background-color 0.3s ease-in-out;
+            position: relative;
+            overflow: hidden;
+            box-shadow: 0 5px 15px rgba(0, 0, 0, 0.2);
+        }
+
+        .nav-links a::before,
+        .nav-links a::after {
+            content: '';
+            position: absolute;
+            width: 100%;
+            height: 2px;
+        }
+
+        .nav-links a::before {
+            top: 0;
+        }
+
+        .nav-links a::after {
+            bottom: 0;
+        }
+
+        .nav-links a:hover {
+            background: linear-gradient(45deg, #45a049, #4caf50);
+        }
+
+        .nav-links a:hover::before,
+        .nav-links a:hover::after {
+            transform: scaleX(1);
+        }
+
+
+        .cards {
+            font-family: 'Arial', sans-serif;
+            margin: 20px;
+            display: flex;
+            flex-wrap: wrap;
+            justify-content: space-around;
+            background-color: #d4d4d4;
+        }
+
+        .card {
+            background-color: #fff;
+            box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
+            padding: 20px;
+            border-radius: 8px;
+            margin: 20px;
+            transition: 0.5s;
+            flex: 1;
+            max-width: 300px;
+        }
+
+        .card:hover {
+            transform: scale(1.05);
+        }
+
+        .card img {
+            width: 100%;
+            height: 200px;
+            object-fit: cover;
+            border-radius: 8px 8px 0 0;
+            border-bottom: 1px solid #ddd;
+        }
+
+        .card-content {
+            padding: 20px;
+        }
+
+        .card h3 {
+            margin: 0;
+            color: #333;
+        }
+
+        .card p {
+            color: #666;
+            margin-bottom: 10px;
+        }
+
+        .card a {
+            display: inline-block;
+            padding: 10px;
+            background-color: #4caf50;
+            color: #fff;
+            text-decoration: none;
+            border-radius: 4px;
+            transition: background-color 0.3s ease-in-out;
+        }
+
+        .card a:hover {
+            background-color: #45a049;
+        }
+
+        .logo {
+            margin-left: -55px;
+            margin-top: 30;
+        }
+
+        .titulo2 {
+            color: #ffffff;
+            
+        }
+
+        .updates-container {
+            color: #000000;
+            font-family:Arial, Helvetica, sans-serif
+        }
+
+        .search-form {
+            display: flex;
+            margin-top: 10px;
+            justify-content: center;
+        }
+
+        .search-form input {
+            padding: 8px;
+            border: none;
+            border-radius: 4px 0 0 4px;
+        }
+
+        .search-form button {
+            padding: 8px 12px;
+            background-color: #4caf50;
+            color: #fff;
+            border: none;
+            border-radius: 0 4px 4px 0;
+            cursor: pointer;
+        }
+
+        .search-form button:hover {
+            background-color: #45a049;
+        }
+
+        .titulo2 {
+            color: black;
+        } 
+        
+        .menu-hamburguer {
+    font-size: 24px;
+    cursor: pointer;
+    color: #fff;
+    position: fixed;
+    left: 20px;
+    top: 15px;
+    z-index: 1001;
+}
+
+.categories {
+    background-color: #333;
+    color: #fff;
+    padding: 20px;
+    width: 200px;
+    height: 100%;
+    position: fixed;
+    top: 0;
+    left: -200px;
+    transition: left 0.3s ease-in-out;
+    z-index: 1000;
+}
+
+.categories ul {
+    list-style: none;
+    padding: 0;
+}
+
+.categories li {
+    margin-bottom: 10px;
+}
+
+.categories a {
+    text-decoration: none;
+    color: #fff;
+    font-weight: bold;
+    font-size: 16px;
+}
+
+.close-btn {
+    font-size: 24px;
+    cursor: pointer;
+    color: #fff;
+    position: absolute;
+    top: 10px;
+    right: 10px;
+}
+
+
+    </style>
+</head>
+<body>
+
+    <div class="menu-hamburguer" id="menuHamburguer">&#9776;</div>
+
+    
+    <div class="categories" id="categories">
+        <div class="close-btn" id="closeBtn">&times;</div>
+        <ul>
+            <li><a href="Corrida.html">Corrida</a></li>
+            <li><a href="Ação.html">Ação</a></li>
+            <li><a href="Terror.html">Terror</a></li>
+            <!-- Adicione mais categorias conforme necessário -->
+        </ul>
+    </div>
+
+    <header>
+        <nav class="navbar">
+            <div class="logo">
+                <img class="Imagem" src="img/channels4_profile-removebg-preview_resized_batcheditor_fotor (1) (1).png" alt="imagem" width="39" height="39">
+                <a href="index.html">Categorila</a>
+            </div>
+            <ul class="nav-links">
+                <li><a href="index.html">Home</a></li>
+                <li><a href="sobre.html">Sobre</a></li>
+                <li><a href="atualizações.html">Atualizações</a></li>
+                <li><a href="contato.html">Contato</a></li>
+                <li><a href="otimizacao.html">Otimizações</a></li>
+                <li><a href="aplicativos.html">Aplicativos</a></li>
+            </ul>
+        </nav>
+
+        <form action="#" method="get" class="search-form" id="searchForm">
+            <input type="text" name="q" placeholder="Pesquisar jogos...">
+            <button type="submit">Pesquisar</button>
+        </form>
+
+        <div id="searchResults"></div>
+
+    </header>
+
+    <h2 class="titulo2">Seja Bem-Vindo!</h2>
+
+    <section class="cards" id="gameCards">
+        
+            <div class="card">
+                <img src="img/unnamed.png" alt="Imagem do Card 2">
+                <div class="card-content">
+                    <h3>Sonic The Hedgehog</h3>
+                    <p>Sonic the Hedgehog é uma franquia de mídia criada e administrada por Yuji Naka e Naoto Oshima da equipe Sonic Team, da Sega. O primeiro jogo da série Sonic.</p>
+                    <a href="sonic.html">Baixar agora</a>
+                </div>
+            </div>
+        </div>
+        
+        <!-- Adicione outra fila -->
+        <div class="card-row">
+            <div class="card">
+                <img src="img/143976514_480331393346873_1805326341434727690_n.jpg" alt="Imagem do Card 3">
+                <div class="card-content">
+                    <h3>Bomba Patch (PSP)</h3>
+                    <p>Bomba Patch é uma série de modificações da série de jogos eletrônicos de futebol Pro Evolution Soccer, criada pelo brasileiro Allan Jefferson. Originou-se em 2007 a partir de um campeonato do sexto título da série, organizado por ele em sua locadora.</p>
+                    <a href="bomba-patch.html">Baixar agora</a>
+                </div>
+            </div>
+        
+        
+            <div class="card">
+                <!-- Conteúdo do quarto card -->
+                <img src="img/46f8b7ef8318b4c2cc2fe8a826bebc74.jpg" alt="Imagem do Card 6">
+                <div class="card-content">
+                    <h3>FPS Unlocker roblox</h3>
+                    <p>Programa que desbloqueia o limite de FPS do roblox!</p>
+                    <a href="roblox.html">Baixar agora</a>
+                </div>
+            </div>
+        </div>
+
+        
+            <div class="card">
+                <img src="img/minecraft-100x100.webp" alt="Imagem do Card 2">
+                <div class="card-content">
+                    <h3>Minecraft Java Edition</h3>
+                    <p>Minecraft Java Edition é um jogo sandbox, Você consegue criar varias coisas com sua imaginação!</p>
+                    <a href="Minecraftjava.html">Baixar agora</a>
+                </div>
+            </div>
+        </div>
+        
+    
+            <div class="card">
+                <!-- Conteúdo do quarto card -->
+                <img src="img/pou.png" alt="Imagem do Card 4">
+                <div class="card-content">
+                    <h3>Pou Apk Mod Dinheiro Infinito.</h3>
+                    <p>Minecraft lite para rodar em aparelhos humildes.</p>
+                    <a href="pou.html">Baixar agora</a>
+                </div>
+            </div>
+        </div>
+
+        
+            <div class="card">
+                <!-- Conteúdo do quarto card -->
+                <img src="img/kinemaster.png" alt="Imagem do Card 6">
+                <div class="card-content">
+                    <h3>Kinemaster Diamond *sem marca d'agua*</h3>
+                    <p>Programa que desbloqueia o limite de FPS do roblox!</p>
+                    <a href="kinemaster.html">Baixar agora</a>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    
+
+
+    <!-- Conteúdo da página aqui -->
+    <div class="paragrafo">
+        <p>Site 4.0.</p>
+    </div> 
+    
+    <script>
+        document.getElementById('searchForm').addEventListener('submit', function (event) {
+    event.preventDefault();
+    const searchTerm = document.querySelector('input[name="q"]').value.toLowerCase();
+
+    const gameCards = document.querySelectorAll('.card');
+
+    gameCards.forEach(card => {
+        const cardTitle = card.querySelector('h3').innerText.toLowerCase();
+        const cardContent = card.querySelector('p').innerText.toLowerCase();
+
+        if (cardTitle.includes(searchTerm) || cardContent.includes(searchTerm)) {
+            card.style.display = 'block';
+        } else {
+            card.style.display = 'none';
+        }
+    });
+});
+
+document.addEventListener('DOMContentLoaded', function () {
+        const menuHamburguer = document.getElementById('menuHamburguer');
+        const categories = document.getElementById('categories');
+        const closeBtn = document.getElementById('closeBtn');
+
+        menuHamburguer.addEventListener('click', function () {
+            categories.style.left = '0';
+            menuHamburguer.style.display = 'none';
+        });
+
+        closeBtn.addEventListener('click', function () {
+            categories.style.left = '-200px';
+            menuHamburguer.style.display = 'block';
+        });
+    });
+
+
+    </script>
+
+</body>
+</html>

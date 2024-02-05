@@ -1,0 +1,79 @@
+/* Adicione estilos para telas menores (máximo de 768 pixels) */
+@media only screen and (max-width: 768px) {
+    .navbar {
+        flex-direction: column;
+        align-items: center;
+    }
+
+    .nav-links {
+        display: flex;
+        flex-wrap: wrap;
+        justify-content: center;
+        margin-top: 10px;
+    }
+
+    .nav-links li {
+        margin: 10px;
+        text-align: center;
+    }
+
+    .nav-links a {
+        padding: 10px;
+        box-sizing: border-box;
+    }
+
+    .logo {
+        margin-left: 0;
+        margin-bottom: 10px;
+    }
+
+    .search-form {
+        flex-direction: column;
+        align-items: center;
+    }
+
+    .search-form input {
+        margin-bottom: 10px;
+        border-radius: 4px;
+    }
+}
+
+
+
+/* Mantenha as alterações originais para telas maiores */
+@media only screen and (min-width: 601px) and (max-width: 1024px) {
+    .navbar {
+        flex-direction: row;
+        justify-content: space-between;
+        background-color: #333;
+        padding: 15px 0;
+    }
+
+    .logo a {
+        color: #fff;
+        text-decoration: none;
+        font-size: 1.5em;
+        font-weight: bold;
+    }
+
+    .nav-links {
+        flex-direction: row;
+        margin-top: 0;
+    }
+
+    .nav-links li {
+        margin-bottom: 0;
+        margin-right: 20px;
+    }
+
+    .nav-links a {
+        color: #fff;
+        text-decoration: none;
+        font-weight: bold;
+        transition: color 0.3s ease-in-out;
+    }
+
+    .nav-links a:hover {
+        color: #00bcd4;
+    }
+}

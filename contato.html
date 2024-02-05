@@ -1,0 +1,115 @@
+<!DOCTYPE html>
+<html lang="pt-br">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Contato</title>
+  <!-- Adicione o link para o Bootstrap (CDN) -->
+  <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.5.2/css/bootstrap.min.css">
+  <style>
+    body {
+      background-color: #f8f9fa;
+    }
+
+    .contact-container {
+      max-width: 600px;
+      margin: 50px auto;
+      background-color: #fff;
+      padding: 20px;
+      border-radius: 10px;
+      box-shadow: 0 0 10px rgba(0, 0, 0, 0.1);
+    }
+
+    h2 {
+      color: #007bff;
+    }
+
+    label {
+      font-weight: bold;
+      color: #333;
+    }
+
+    input, textarea {
+      width: 100%;
+      padding: 10px;
+      margin-bottom: 20px;
+      border: 1px solid #ccc;
+      border-radius: 5px;
+    }
+
+    button {
+      background-color: #007bff;
+      color: #fff;
+      padding: 10px 15px;
+      border: none;
+      border-radius: 5px;
+      cursor: pointer;
+    }
+
+    button:hover {
+      background-color: #0056b3;
+    }
+
+    @media (max-width: 576px) {
+      .contact-container {
+        margin: 20px;
+      }
+    }
+  </style>
+</head>
+<body>
+
+  <div class="container contact-container">
+    <h2 class="text-center">Entre em Contato</h2>
+    <form action="https://formspree.io/f/moqozgbz" method="post" class="contact-form">
+        <p>Aqui você pode me enviar problemas, páginas ou links quebrados.</p>
+      
+        <div class="form-group">
+          <label for="name">Nome:</label>
+          <input type="text" id="name" name="name" required>
+        </div>
+      
+        <div class="form-group">
+          <label for="email">E-mail:</label>
+          <input type="email" id="email" name="email" required value="thigothiagosonic@gmail.com" required placeholder="Insira: thigothiagosonic@gmail.com">
+        </div>
+      
+        <div class="form-group">
+          <label for="subject">Assunto:</label>
+          <input type="text" id="subject" name="subject" required>
+        </div>
+      
+        <div class="form-group">
+          <label for="message">Mensagem:</label>
+          <textarea id="message" name="message" rows="8" required></textarea>
+        </div>
+      
+        <div class="form-group">
+          <button type="submit">Enviar Mensagem</button>
+        </div>
+      </form>
+
+    <!-- Botão de Voltar -->
+    <button onclick="goBack()" class="btn btn-secondary mt-3">Voltar</button>
+  </div>
+
+  <!-- Adicione o link para o jQuery e o Bootstrap (CDN) -->
+  <script src="https://code.jquery.com/jquery-3.5.1.slim.min.js"></script>
+  <script src="https://cdn.jsdelivr.net/npm/@popperjs/core@2.10.2/dist/umd/popper.min.js"></script>
+  <script src="https://stackpath.bootstrapcdn.com/bootstrap/4.5.2/js/bootstrap.min.js"></script>
+
+  <script>
+    // Adicione aqui um script para lidar com o envio do formulário, se necessário
+    document.getElementById('contact-form').addEventListener('submit', function (event) {
+      // Adicione código de manipulação de envio aqui, se necessário
+      alert('Formulário enviado! (Este é apenas um exemplo, nenhum envio real está sendo feito)');
+      event.preventDefault();
+    });
+
+    function goBack() {
+      window.history.back();
+    }
+  </script>
+
+</body>
+</html>

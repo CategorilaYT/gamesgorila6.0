@@ -1,0 +1,594 @@
+<!DOCTYPE html>
+<html lang="pt-br">
+
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Otimização de Máquina</title>
+  <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0/css/all.min.css">
+  <style>
+    body {
+      font-family: 'Arial', sans-serif;
+      margin: 0;
+      padding: 0;
+      background-color: #f5f5f5;
+      padding-right: 1px; /* Adiciona um espaço para compensar a barra de rolagem vertical em alguns navegadores */
+    }
+
+    html, body {
+      max-width: 100%;
+      overflow-x: hidden;
+    }
+
+    header, footer {
+      background-color: #333;
+      color: #fff;
+      text-align: center;
+      padding: 1em 0;
+    }
+
+    section.row {
+      display: flex;
+      justify-content: space-around;
+      flex-wrap: wrap;
+    }
+
+    .card {
+      background-color: #d3d3d3;
+      border-radius: 10px;
+      overflow: hidden;
+      margin: 15px;
+      width: 300px;
+      position: relative;
+      transition: background-color 0.3s;
+      user-select: none;
+    }
+
+    .card:hover {
+      background-color: #d1d1d1;
+    }
+
+    .card img {
+      width: 100%;
+      height: 200px;
+      object-fit: cover;
+      border-bottom: 1px solid #ddd;
+    }
+
+    .card-content {
+      padding: 1.5em;
+    }
+
+    .card-content h2 {
+      margin-bottom: 10px;
+      color: #333;
+    }
+
+    .card-content p {
+      color: #666;
+      line-height: 1.5;
+    }
+
+    .card-content .details {
+      margin-top: 15px;
+      color: #888;
+    }
+
+    .details span {
+      margin-right: 10px;
+    }
+
+    .card-content .actions {
+      margin-top: 15px;
+      display: flex;
+      justify-content: space-between;
+    }
+
+    .download-button,
+    .ver-destaques-button {
+      background-color: #4CAF50;
+      color: #fff;
+      padding: 10px 15px;
+      text-decoration: none;
+      border-radius: 5px;
+      transition: background-color 0.3s, color 0.3s;
+      user-select: none;
+      cursor: pointer;
+      position: relative;
+      z-index: 10;
+    }
+
+    .download-button:hover,
+    .ver-destaques-button:hover {
+      background-color: #2E8B57;
+      color: #fff;
+    }
+
+    .icon {
+      color: #555;
+      margin-right: 5px;
+    }
+
+    .card::before {
+      content: '';
+      position: absolute;
+      top: 0;
+      left: 0;
+      width: 100%;
+      height: 100%;
+      background: linear-gradient(45deg, rgba(0, 0, 0, 0.1), rgba(0, 0, 0, 0.1));
+      opacity: 0;
+      z-index: 2;
+      transition: opacity 0.3s;
+    }
+
+    .card:hover::before {
+      opacity: 1;
+    }
+
+    .decoration {
+      margin: 20px;
+      text-align: center;
+    }
+
+    .decoration i {
+      font-size: 48px;
+      color: #555;
+      margin-bottom: 10px;
+    }
+
+    .scroll-to-top {
+      position: fixed;
+      top: 20px;
+      left: 20px;
+      background-color: #4CAF50;
+      color: #fff;
+      padding: 10px 15px;
+      border-radius: 5px;
+      text-decoration: none;
+      display: none;
+    }
+
+    .scroll-to-top:hover {
+      background-color: #45a049;
+    }
+
+    .highlight-section a.download-button {
+      background-color: #54a151;
+      color: #fff;
+      padding: 10px 15px;
+      text-decoration: none;
+      border-radius: 5px;
+      transition: background-color 0.3s, color 0.3s;
+      user-select: none;
+      cursor: pointer;
+    }
+
+    .highlight-section a.download-button:hover {
+      background-color: #2b5e2f;
+      color: #fff;
+    }
+
+    header {
+            background-color: #2e2e2e;
+            padding: 15px 0;
+            position: relative;
+            text-align: center;
+            color: #fff;
+        }
+        
+        .navbar {
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            max-width: 1000px;
+            margin: 0 auto;
+        }
+
+        .logo a {
+            color: #fff;
+            text-decoration: none;
+            font-size: 1.5em;
+            font-weight: bold;
+            display: flex;
+            align-items: center;
+        }
+
+        .nav-links {
+            list-style: none;
+            display: flex;
+        }
+
+        .nav-links li {
+            margin-right: 20px;
+        }
+
+        .nav-links a {
+            color: #fff;
+            text-decoration: none;
+            font-weight: bold;
+            padding: 10px 20px;
+            border-radius: 30px;
+            background: linear-gradient(45deg, #4caf50, #45a049);
+            transition: background-color 0.3s ease-in-out;
+            position: relative;
+            overflow: hidden;
+            box-shadow: 0 5px 15px rgba(0, 0, 0, 0.2);
+        }
+
+        .nav-links a::before,
+        .nav-links a::after {
+            content: '';
+            position: absolute;
+            width: 100%;
+            height: 2px;
+        }
+
+        .nav-links a::before {
+            top: 0;
+        }
+
+        .nav-links a::after {
+            bottom: 0;
+        }
+
+        .nav-links a:hover {
+            background: linear-gradient(45deg, #45a049, #4caf50);
+        }
+
+        .nav-links a:hover::before,
+        .nav-links a:hover::after {
+            transform: scaleX(1);
+        }
+
+    @media only screen and (max-width: 600px) {
+      .card {
+        margin: 15px;
+      }
+
+      .highlight-section a.download-button,
+      .download-button,
+      .ver-destaques-button {
+        width: 100%;
+      }
+
+      .scroll-to-top {
+        display: block;
+      }
+    }
+  </style>
+</head>
+
+<body>
+
+  <header>
+    <h1>Otimização pc/mobile</h1>
+    <nav class="navbar">
+      <div class="logo">
+          <img class="Imagem" src="img/channels4_profile-removebg-preview_resized_batcheditor_fotor (1) (1).png" alt="imagem" width="39" height="39">
+          <a href="index.html">Categorila</a>
+      </div>
+      <ul class="nav-links">
+          <li><a href="windows.html">Windows</a></li>
+      </ul>
+  </nav>
+  </header>
+
+  <div class="highlight-section">
+    <h2>Destaque</h2>
+    <p>Seu aparelho ou computador está travando? Confira nossos programas em destaque para uma otimização ainda mais eficiente!</p>
+    <a href="index.html" class="download-button">
+      <i class="icon fas fa-arrow-left"></i> Voltar
+    </a>
+  </div>
+
+  <section class="row">
+    <!-- Card 1 -->
+    <div class="card">
+      <div class="card-content">
+        <h2>OBS ULTRA LITE</h2>
+        <p>Descrição do OBS LITE V3. Este OBS lite não usa nem 10% de sua CPU, ele não consome muito da sua RAM, e não trava nas gravações!</p>
+        <div class="details">
+          <span><strong>Categoria:</strong> Utilitário</span>
+          <span><strong>Requisitos:</strong> Windows 10/8.1/8/7</span>
+        </div>
+        <div class="actions">
+          <a href="obs.html" class="download-button">
+            <i class="icon fas fa-download"></i> Download
+          </a>
+          <span class="icon fas fa-star"></span>
+        </div>
+      </div>
+    </div>
+
+    <!-- Card 2 -->
+    <div class="card">
+      <div class="card-content">
+        <h2>Mega Pack De Otimização Para pc</h2>
+        <p>Esse pack contem varias otimizações que ajudam o pc, antes de baixar recomendo ver o video completo no meu canal para não dar erro!</p>
+        <div class="details">
+          <span><strong>Categoria:</strong> Otimização</span>
+          <span><strong>Requisitos:</strong> Desktop</span>
+        </div>
+        <div class="actions">
+          <a href="Pack.html" class="download-button">
+            <i class="icon fas fa-download"></i> Download
+          </a>
+          <span class="icon fas fa-star"></span>
+        </div>
+      </div>
+    </div>
+
+    <!-- Card 3 -->
+    <div class="card">
+      <div class="card-content">
+        <h2>1Tap Cleaner PRO</h2>
+        <p>O melhor aplicativo para ter mais espaço no seu celular, limpa automaticamente sem fazer nada! e vem com a versão pro.</p>
+        <div class="details">
+          <span><strong>Categoria:</strong> Otimização</span>
+          <span><strong>Requisitos:</strong> Android</span>
+        </div>
+        <div class="actions">
+          <a href="1Tap.html" class="download-button">
+            <i class="icon fas fa-download"></i> Download
+          </a>
+          <span class="icon fas fa-star"></span>
+        </div>
+      </div>
+    </div>
+
+        <!-- Card 3 -->
+        <div class="card">
+          <div class="card-content">
+            <h2>Otimização Para Minecraft Java</h2>
+            <p>Deixe seu minecraft Java Edition Mais leve sem travamentos</p>
+            <div class="details">
+              <span><strong>Categoria:</strong> Otimização</span>
+              <span><strong>Requisitos:</strong> Desktop</span>
+            </div>
+            <div class="actions">
+              <a href="otimizacao_minecraft.html" class="download-button">
+                <i class="icon fas fa-download"></i> Download
+              </a>
+              <span class="icon fas fa-star"></span>
+            </div>
+          </div>
+        </div>
+
+        <!-- Card 3 -->
+        <div class="card">
+          <div class="card-content">
+            <h2>ET-Optmizer</h2>
+            <p>Um leve arquivo de otimização.</p>
+            <div class="details">
+              <span><strong>Categoria:</strong> Otimização</span>
+              <span><strong>Requisitos:</strong> Desktop</span>
+            </div>
+            <div class="actions">
+              <a href="https://4br.me/jgIT" class="download-button">
+                <i class="icon fas fa-download"></i> Download
+              </a>
+              <span class="icon fas fa-star"></span>
+            </div>
+          </div>
+        </div>
+
+        <!-- Card 3 -->
+        <div class="card">
+          <div class="card-content">
+            <h2>Painel V11 - Senha 0</h2>
+            <p>Otimização dexx.</p>
+            <div class="details">
+              <span><strong>Categoria:</strong> Otimização</span>
+              <span><strong>Requisitos:</strong> Desktop</span>
+            </div>
+            <div class="actions">
+              <a href="https://4br.me/Tt0l" class="download-button">
+                <i class="icon fas fa-download"></i> Download
+              </a>
+              <span class="icon fas fa-star"></span>
+            </div>
+          </div>
+        </div>
+
+        <!-- Card 3 -->
+        <div class="card">
+          <div class="card-content">
+            <h2>Hone</h2>
+            <p>Hone é um otimizador automático 2.232.0.3.</p>
+            <div class="details">
+              <span><strong>Categoria:</strong> Otimização</span>
+              <span><strong>Requisitos:</strong> Desktop</span>
+            </div>
+            <div class="actions">
+              <a href="https://4br.me/8dn2CQbOm9" class="download-button">
+                <i class="icon fas fa-download"></i> Download
+              </a>
+              <span class="icon fas fa-star"></span>
+            </div>
+          </div>
+        </div>
+
+
+        <!-- Card 3 -->
+        <div class="card">
+          <div class="card-content">
+            <h2>Limpar o cache</h2>
+            <p>Empty Standby List é um arquivo que ao ser executado o cache será limpado.</p>
+            <div class="details">
+              <span><strong>Categoria:</strong> Otimização</span>
+              <span><strong>Requisitos:</strong> Desktop</span>
+            </div>
+            <div class="actions">
+              <a href="https://4br.me/jgIT" class="download-button">
+                <i class="icon fas fa-download"></i> Download
+              </a>
+              <span class="icon fas fa-star"></span>
+            </div>
+          </div>
+        </div>
+
+        <div class="card">
+          <div class="card-content">
+            <h2>Painel De Otimização</h2>
+            <p>Versão Xerife, pack pós instalação/formatação do seu computador.</p>
+            <div class="details">
+              <span><strong>Categoria:</strong> Otimização</span>
+              <span><strong>Requisitos:</strong> Desktop</span>
+            </div>
+            <div class="actions">
+              <a href="https://4br.me/V57T" class="download-button">
+                <i class="icon fas fa-download"></i> Download
+              </a>
+              <span class="icon fas fa-star"></span>
+            </div>
+          </div>
+        </div>
+
+        <div class="card">
+          <div class="card-content">
+            <h2>Optmizer</h2>
+            <p>Otimização avançada versão 15.4</p>
+            <div class="details">
+              <span><strong>Categoria:</strong> Otimização</span>
+              <span><strong>Requisitos:</strong> Desktop</span>
+            </div>
+            <div class="actions">
+              <a href="https://4br.me/HyD3cdS" class="download-button">
+                <i class="icon fas fa-download"></i> Download
+              </a>
+              <span class="icon fas fa-star"></span>
+            </div>
+          </div>
+        </div>
+
+        <div class="card">
+          <div class="card-content">
+            <h2>Shutup</h2>
+            <p>Desabilita funções do windows versão 15.4.</p>
+            <div class="details">
+              <span><strong>Categoria:</strong> Otimização</span>
+              <span><strong>Requisitos:</strong> Desktop</span>
+            </div>
+            <div class="actions">
+              <a href="https://4br.me/OZwBOLz2" class="download-button">
+                <i class="icon fas fa-download"></i> Download
+              </a>
+              <span class="icon fas fa-star"></span>
+            </div>
+          </div>
+        </div>
+
+        <div class="card">
+          <div class="card-content">
+            <h2>Dism++</h2>
+            <p>Remove opções do windows e contem otimização.</p>
+            <div class="details">
+              <span><strong>Categoria:</strong> Otimização</span>
+              <span><strong>Requisitos:</strong> Desktop</span>
+            </div>
+            <div class="actions">
+              <a href="https://4br.me/3Jen9ga" class="download-button">
+                <i class="icon fas fa-download"></i> Download
+              </a>
+              <span class="icon fas fa-star"></span>
+            </div>
+          </div>
+        </div>
+
+        <div class="card">
+          <div class="card-content">
+            <h2>Batlez Folder</h2>
+            <p>Um poderoso cmd com varias tweaks para otimizar seu computador.</p>
+            <div class="details">
+              <span><strong>Categoria:</strong> Otimização</span>
+              <span><strong>Requisitos:</strong> Desktop</span>
+            </div>
+            <div class="actions">
+              <a href="https://4br.me/HWCJJDEYfr" class="download-button">
+                <i class="icon fas fa-download"></i> Download
+              </a>
+              <span class="icon fas fa-star"></span>
+            </div>
+          </div>
+        </div>
+        
+  </section>
+
+  <!-- (Seção de depoimentos e outros elementos HTML permanecem inalterados) -->
+
+  <div class="testimonial-section">
+    <h2>Contato Para Remoção.</h2>
+    <div class="testimonial">
+      <p>Quem quiser entrar em contato comigo por remoção de programa, app, ou parceria,<br> envie um email para thigothiagosonic@gmail.com. </p>
+    </div>
+  </div>
+
+  <div class="decoration">
+    <i class="fas fa-cogs"></i>
+    <p>Melhor desempenho para seu pc! ou smartphone.</p>
+  </div>
+
+  <div class="decoration">
+    <i class="fas fa-shield-alt"></i>
+    <p>Programas e apps seguros 100% testados.</p>
+  </div>
+
+  <div class="decoration">
+    <i class="fas fa-tachometer-alt"></i>
+    <p>Acelere o desempenho do seu computador ou celular com nossos utilitários de otimização.</p>
+  </div>
+
+  <div class="decoration">
+    <i class="fas fa-info-circle"></i>
+    <p>Programas somente modificado, créditos totais aos criadores.</p>
+  </div>
+
+  <footer>
+    <p>&copy; 2023-2024 Categorila. Todos os direitos reservados.</p>
+  </footer>
+
+  <a href="#" class="scroll-to-top">
+    <i class="fas fa-arrow-up"></i> Topo
+  </a>
+
+  <script>
+    document.addEventListener("DOMContentLoaded", function () {
+      var scrollButton = document.querySelector('.scroll-to-top');
+
+      function toggleScrollButton() {
+        if (window.scrollY > 0) {
+          scrollButton.style.display = 'block';
+        } else {
+          scrollButton.style.display = 'none';
+        }
+      }
+
+      window.addEventListener('scroll', toggleScrollButton);
+      window.addEventListener('resize', toggleScrollButton);
+
+      scrollButton.addEventListener('click', function (e) {
+        e.preventDefault();
+        window.scrollTo({
+          top: 0,
+          behavior: 'smooth'
+        });
+      });
+
+      toggleScrollButton();
+    });
+
+    // Adicionando comportamento de clique para o botão de download
+    document.getElementById('downloadButton').addEventListener('click', function (event) {
+      event.preventDefault();
+      console.log('Botão de download clicado!');
+      // Adicione o resto da sua lógica aqui...
+    });
+
+    function goBack() {
+      window.history.back();
+    }
+  </script>
+</body>
+
+</html>
